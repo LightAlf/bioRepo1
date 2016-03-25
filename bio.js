@@ -16,25 +16,25 @@ function Animal(sx,sy,sname) {
 var World = {
 	l:640,
 	h:480,
-	list: [], //список действующих лиц
-	map: [], //карта размером l*h
+	list: [], //Г±ГЇГЁГ±Г®ГЄ Г¤ГҐГ©Г±ГІГўГіГѕГ№ГЁГµ Г«ГЁГ¶
+	map: [], //ГЄГ Г°ГІГ  Г°Г Г§Г¬ГҐГ°Г®Г¬ l*h
 
 	
-	mapset: function(b,x,y) { this.map[y*this.l+x]= b; }, // можно ещё проверку выходов за пределы сделать
-	mapget: function(x,y) { return this.map[y*this.l+x]; }, // можно ещё возвращать что-то при выходе за пределы
+	mapset: function(b,x,y) { this.map[y*this.l+x]= b; }, // Г¬Г®Г¦Г­Г® ГҐГ№Вё ГЇГ°Г®ГўГҐГ°ГЄГі ГўГ»ГµГ®Г¤Г®Гў Г§Г  ГЇГ°ГҐГ¤ГҐГ«Г» Г±Г¤ГҐГ«Г ГІГј
+	mapget: function(x,y) { return this.map[y*this.l+x]; }, // Г¬Г®Г¦Г­Г® ГҐГ№Вё ГўГ®Г§ГўГ°Г Г№Г ГІГј Г·ГІГ®-ГІГ® ГЇГ°ГЁ ГўГ»ГµГ®Г¤ГҐ Г§Г  ГЇГ°ГҐГ¤ГҐГ«Г»
 	
-	Draw: function() {  return false; }, // слот для функции анимации мира
+	Draw: function() {  return false; }, // Г±Г«Г®ГІ Г¤Г«Гї ГґГіГ­ГЄГ¶ГЁГЁ Г Г­ГЁГ¬Г Г¶ГЁГЁ Г¬ГЁГ°Г 
 	
 	Act: function() 
 	{	var b;
 		for (var i = 0; i < World.list.length; i++)
-		{	b = World.list[i]; // b может быть и undefined, потому лучше перестраховаться:
+		{	b = World.list[i]; // b Г¬Г®Г¦ГҐГІ ГЎГ»ГІГј ГЁ undefined, ГЇГ®ГІГ®Г¬Гі Г«ГіГ·ГёГҐ ГЇГҐГ°ГҐГ±ГІГ°Г ГµГ®ГўГ ГІГјГ±Гї:
 			if(b) b.Act1();
 		};
 		this.t++;
 	},
 	
-	t: 0 //номер итерации
+	t: 0 //Г­Г®Г¬ГҐГ° ГЁГІГҐГ°Г Г¶ГЁГЁ
 }
 
 World.Create = function(sl,sh,scount)
@@ -45,13 +45,13 @@ World.Create = function(sl,sh,scount)
 	
 	var Empty = new Animal(0,0,"Empty");
 	Empty.R = 0; Empty.G = 0; Empty.B = 255;
-	// интересно, что начальное заполнение массива сильно повышает производительность:
+	// ГЁГ­ГІГҐГ°ГҐГ±Г­Г®, Г·ГІГ® Г­Г Г·Г Г«ГјГ­Г®ГҐ Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГҐ Г¬Г Г±Г±ГЁГўГ  Г±ГЁГ«ГјГ­Г® ГЇГ®ГўГ»ГёГ ГҐГІ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГІГҐГ«ГјГ­Г®Г±ГІГј:
 	for(var yp=0; yp<sh; yp++) for(var xp=0; xp<sl; xp++) World.map[yp*sl+xp]=Empty;
 	World.Empty = Empty;
 	
 	for (var i = 0; i < scount; i++) {
-		sx = sl*Math.random()^0; // xor 0 эквивалентен округлению
-		sy = sh*Math.random()^0; // xor 0 эквивалентен округлению
+		sx = sl*Math.random()^0; // xor 0 ГЅГЄГўГЁГўГ Г«ГҐГ­ГІГҐГ­ Г®ГЄГ°ГіГЈГ«ГҐГ­ГЁГѕ
+		sy = sh*Math.random()^0; // xor 0 ГЅГЄГўГЁГўГ Г«ГҐГ­ГІГҐГ­ Г®ГЄГ°ГіГЈГ«ГҐГ­ГЁГѕ
 		var b = new Animal(sx,sy, "Num"+i.toString());
 		this.list.push(b);
 		this.map[sy*this.l + sx] = b;
@@ -139,7 +139,7 @@ function onTimer()
 if(true)
 {
 	var perf = "?";
-	if(performance.now) // не работает в iron-хроме
+	if(performance.now) // Г­ГҐ Г°Г ГЎГ®ГІГ ГҐГІ Гў iron-ГµГ°Г®Г¬ГҐ
 	if(World.t==0) p_st = performance.now()/1000;
 		else { var p = performance.now()/1000;
 				perf = World.t/(p - p_st);
@@ -159,20 +159,20 @@ function doTimerTrigger()
 {
   tmOn = !tmOn;
   var bt = document.getElementById("ButtonTimer");
-  if(tmOn) bt.innerHTML = "Выкл.таймер";
-      else bt.innerHTML = "Вкл.таймер";
+  if(tmOn) bt.innerHTML = "Г‚Г»ГЄГ«.ГІГ Г©Г¬ГҐГ°";
+      else bt.innerHTML = "Г‚ГЄГ«.ГІГ Г©Г¬ГҐГ°";
       
   if(tmOn) timer = setTimeout(onTimer, 100);
-  else clearTimeout(timer); // Остановить таймер (если запущен)
+  else clearTimeout(timer); // ГЋГ±ГІГ Г­Г®ГўГЁГІГј ГІГ Г©Г¬ГҐГ° (ГҐГ±Г«ГЁ Г§Г ГЇГіГ№ГҐГ­)
 }
 
 
 var cc; // CanvasContext
 var pixels;
 var p_width, p_height;
-var infopanel; // параграф информации
+var infopanel; // ГЇГ Г°Г ГЈГ°Г Гґ ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГЁ
 
-var dx=0, dy=0; //глобальные переменные для движения по стрелкам клавиатуры
+var dx=0, dy=0; //ГЈГ«Г®ГЎГ Г«ГјГ­Г»ГҐ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ Г¤Г«Гї Г¤ГўГЁГ¦ГҐГ­ГЁГї ГЇГ® Г±ГІГ°ГҐГ«ГЄГ Г¬ ГЄГ«Г ГўГЁГ ГІГіГ°Г»
 var isKey = { up:false, down:false, left:false, right:false, z:false, x:false }
 
 function processKeyDown(e) {
@@ -193,7 +193,7 @@ function processKeyUp(e) {
 
 function onLoadMy()
 {
-	/*загрузка параметров командной строки:
+	/*Г§Г ГЈГ°ГіГ§ГЄГ  ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў ГЄГ®Г¬Г Г­Г¤Г­Г®Г© Г±ГІГ°Г®ГЄГЁ:
 	var urlParams = parseParamsFromUrl();
 	var txt = "";
 	for(var key in urlParams) 
@@ -201,7 +201,7 @@ function onLoadMy()
 	document.all.mycode.value=txt;
 	*/
 
-	//глобальная переменная для удобства обращения с канвой:
+	//ГЈГ«Г®ГЎГ Г«ГјГ­Г Гї ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї ГіГ¤Г®ГЎГ±ГІГўГ  Г®ГЎГ°Г Г№ГҐГ­ГЁГї Г± ГЄГ Г­ГўГ®Г©:
 	var b_canvas = document.getElementById("canv");
 	var b_context = b_canvas.getContext("2d");
 	cc = b_context;
@@ -214,7 +214,7 @@ function onLoadMy()
 
 	infopanel = document.getElementById("infopanel"); 
 
-	//нажатия клавиш отследим глобально:
+	//Г­Г Г¦Г ГІГЁГї ГЄГ«Г ГўГЁГё Г®ГІГ±Г«ГҐГ¤ГЁГ¬ ГЈГ«Г®ГЎГ Г«ГјГ­Г®:
 	window.onkeydown = processKeyDown;
 	window.onkeyup = processKeyUp;  
 	
@@ -226,4 +226,6 @@ function onLoadMy()
 	document.getElementById("ButtonTimer").onclick = doTimerTrigger;
 };
 
-window.onload = onLoadMy; //при таком подходе html-код полностью очищается от скриптов, т.е. представление отделяется от логики
+window.onload = onLoadMy; //ГЇГ°ГЁ ГІГ ГЄГ®Г¬ ГЇГ®Г¤ГµГ®Г¤ГҐ html-ГЄГ®Г¤ ГЇГ®Г«Г­Г®Г±ГІГјГѕ Г®Г·ГЁГ№Г ГҐГІГ±Гї Г®ГІ Г±ГЄГ°ГЁГЇГІГ®Гў, ГІ.ГҐ. ГЇГ°ГҐГ¤Г±ГІГ ГўГ«ГҐГ­ГЁГҐ Г®ГІГ¤ГҐГ«ГїГҐГІГ±Гї Г®ГІ Г«Г®ГЈГЁГЄГЁ
+
+// РёР·РјРµРЅРёР»Рё РЅР° utf8
